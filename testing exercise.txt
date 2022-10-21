@@ -3,6 +3,7 @@ URL: To be tested: https://forms.liferay.com/web/forms/shared/-/form/122548
 -----------  FUNCTIONAL TEST PLAN  ------------------------------------------
 -------------------- Functional positive t. cases --------------------------
 
+@Automated
 Precond: Liferay form page is displayed in browser and all fields are empty
          Language by default is set and displayed texts are in that language
 1)   A user fills in all the compulsory fields and then submits the form 
@@ -34,6 +35,7 @@ Precond: Execute first positive test case 1
 		
 -------------------- Functional negative t. cases
 
+@Automated
 Precond: Liferay form page is displayed in browser and all fields are empty
          Language by default is set and displayed texts are in that language
 1)   A user does not fill in all the compulsory fields and user tries to submit the form 
@@ -48,7 +50,7 @@ Precond: Liferay form page is displayed in browser and all fields are empty
 	  Expected: the system does not allow it and placeholder shows nothing
 	
 ------------------------------------------ TEST REPORT ----------------------------------------
-Here the list of soptted defects:
+Here the list of spotted defects:
 
 1) 'what' word should start with capital w in sentence 'what was the date that Liferay was founded?'
 
@@ -82,6 +84,7 @@ See please the following screenshot. Please see attached screenshots as evidence
 >>>>Features to be tested
 
 Functional tests, positive and negative, with a variety of preconditions. These tests will have a set of assertions.
+Automated tests: Positive #1 and Negative #2 were automated. It would be desirable to automated as much as possible the functional test cases.
 
 
 >>>>Features not to be tested :
@@ -91,8 +94,8 @@ Definition of test data generation: It could be interesting to test massively wi
 This generated data will be available in the properties file so we can conduct a Data Driven Test.
 
 Testing tools: selenium webdrive for automated funcional testing. 
-               Required libraries loaded via Maven in order to have the PO updated properly.
-               JMeter for stress/load testing - definition of base lines for carrying out the performance tests.
+               Required libraries loaded via Maven in order to have the POM updated properly.
+               JMeter for stress/load testing - definition of base lines for carrying out non-fucntional tests (load, stress, endurance, volume).
 			    
 
 Risk analysis: Recommendable to perform a Security test for the web page. There are online pages than can scan for free the
