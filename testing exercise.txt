@@ -1,0 +1,100 @@
+URL: To be tested: https://forms.liferay.com/web/forms/shared/-/form/122548 
+
+-----------  FUNCTIONAL TEST PLAN  ------------------------------------------
+-------------------- Functional positive t. cases --------------------------
+
+Precond: Liferay form page is displayed in browser and all fields are empty
+         Language by default is set and displayed texts are in that language
+1)   A user fills in all the compulsory fields and then submits the form 
+      Expected: Form is successfully submitted
+	        Thank you message is displayed
+		'Submit Again' button is available and clickable
+                Green tooltip shows up at the left bottom of the Thank you page during some seconds.
+				
+Precond: Liferay form page is displayed in browser and all fields are empty
+         Language by default is set and displayed texts are in that language
+2)   A user reloads the page by clicking in reload button
+      Expected: Form is reloaded and all the required fields are available
+	        Texts are in the same language
+		'Submit' button is available
+
+3)   A user resizes the page(zooms in or zooms out), fills all the compulsory fields and submits the form
+      Expected: Form is successfully submitted
+	        Thank you message is displayed
+		'Submit Again' button is available and clickable
+		Green tooltip shows up at the left bottom of the Thank you page during some seconds.
+
+Precond: Liferay form page is already filled in with all the required data
+4) A user refreshes the page by pressing browser's refresh button or ctrl+F5
+    Expected: Form is emptied so all the previously inserted data is gone.
+
+Precond: Execute first positive test case 1
+4) A user clicks in backwards button of the browser
+    Expected: User lands in the first page and all the previously inserted data is gone.
+		
+-------------------- Functional negative t. cases
+
+Precond: Liferay form page is displayed in browser and all fields are empty
+         Language by default is set and displayed texts are in that language
+1)   A user does not fill in all the compulsory fields and user tries to submit the form 
+      Expected: Form is not submitted
+	        The unfilled fields become red and show warning message 'This field is required' in red too.
+				
+2) A user sets a date in the date field by inserting any char different than a number
+	  Expected: the system does not allow it and placeholder shows nothing
+	  
+3) A user tries to set a date in the date field (which btw follows the format MM/DD/YYYY) by inserting numbers that are out of the
+    range for DAYS[01,max day according to the chosen month] and MONTHS [1,12]
+	  Expected: the system does not allow it and placeholder shows nothing
+	
+------------------------------------------ TEST REPORT ----------------------------------------
+Here the list of soptted defects:
+
+1) 'what' word should start with capital w in sentence 'what was the date that Liferay was founded?'
+
+2) tooltip of language icon shows "comportamiento" text. In my humble opinion, the text should be 'language/choose language' or something 
+ that indicates that user can switch between languages
+ 
+3) Some texts in Portuguese form remain untranslated, before submitting and after submitting the data: 
+			'Let´s party rock'  sentence
+			'Indicates Required Fields' sentence
+			'forms' shows up instead of 'fórmulario' three times in the forms texts
+			
+4) If language different than English was chosen, after submitting the form data, the displayed message "Thank you. Your information was successfully received. Thank you for filling out the form" and 
+button 'Submit Again' remained untranslated.
+
+5) Size limit for text field and text area must be established in order to prevent the system from crashing or prevent extremely high response times
+due to huge amount of data being submitted.
+
+6) User is able to set a date in the future which does not make sense according to the question 'what was the date that Liferay was founded?'
+A validation mechanism should be established in the date field so when the user clicks in submit button, the form is rejected and the 
+system informs the user about this inserted wrong date.
+
+7) In the calendar, the available range of years displayed is more restricted than the one the user can set in the placeholder.
+Example: By clicking in the calendar icon, 2017 is the minimun year user can set. But as opposed to that, user can insert in the placeholder
+older years than 2017, for instance 1900. This is totally inconsistent. The range should be the same when trying both ways. System
+should show an error message in case the date inserted in the placeholder is out of range.
+
+8) Some errors spotted in the Inspect>Console of the browser when loading the Liferay form page regardless of the used browser
+See please the following screenshot. Please see attached screenshots as evidences.
+
+-------------------------------- TEST STRATEGY ---------------------------------------------
+>>>>Features to be tested
+
+Functional tests, positive and negative, with a variety of preconditions. These tests will have a set of assertions.
+
+
+>>>>Features not to be tested :
+    As an example: different charsets inserted as texts in the required fields
+
+Definition of test data generation: It could be interesting to test massively with randomly generated data.
+This generated data will be available in the properties file so we can conduct a Data Driven Test.
+
+Testing tools: selenium webdrive for automated funcional testing. 
+               Required libraries loaded via Maven in order to have the PO updated properly.
+               JMeter for stress/load testing - definition of base lines for carrying out the performance tests.
+			    
+
+Risk analysis: Recommendable to perform a Security test for the web page. There are online pages than can scan for free the
+Liferay web page and generate a report.
+Example:  https://observatory.mozilla.org/analyze/forms.liferay.com
